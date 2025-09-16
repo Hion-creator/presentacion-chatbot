@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesis: Integración de IA en Onboarding</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Slate & Sky Blue -->
+    <!-- Application Structure Plan: Se ha diseñado una Single-Page Application (SPA) con navegación lateral fija. Esta estructura permite una exploración no lineal de la tesis, dividida en secciones temáticas: Problema, Solución, Resultados y Calidad. Este enfoque de "dashboard" es más intuitivo y moderno que una presentación lineal, permitiendo a los usuarios profundizar en las áreas de su interés. Las interacciones clave incluyen gráficos dinámicos para datos cuantitativos, comparadores visuales para pruebas A/B y diagramas interactivos para la arquitectura, facilitando la comprensión de conceptos complejos. -->
+    <!-- Visualization & Content Choices: 
+        - Problema: Árbol de problemas (HTML/CSS) y gráfico de dona (Chart.js) para expectativas de usuario. Objetivo: Organizar y comparar. Justificación: Más interactivo que una imagen estática.
+        - Solución: Diagrama de arquitectura interactivo (HTML/CSS con tooltips) para explicar los componentes. Objetivo: Informar. Justificación: Facilita la comprensión de la estructura técnica.
+        - Resultados: Comparador de pruebas A/B (JS) y gráfico de barras (Chart.js) para la prueba T. Objetivo: Comparar. Justificación: Visualiza la mejora y la eficiencia de forma clara.
+        - Calidad: Dashboard de SonarQube con gráfico de medidor (Chart.js). Objetivo: Informar. Justificación: Presenta métricas de calidad de software de manera impactante.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .nav-link.active {
+            background-color: #0284c7; /* sky-600 */
+            color: white;
+            transform: translateX(4px);
+        }
+        .tooltip {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .has-tooltip:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="flex">
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 h-screen sticky top-0 bg-slate-800 text-white p-6 hidden lg:flex flex-col">
+            <h1 class="text-2xl font-bold text-sky-400 mb-2">Lia Chatbot</h1>
+            <p class="text-sm text-slate-400 mb-8">Análisis Interactivo del Proyecto</p>
+            <nav id="desktop-nav" class="flex flex-col space-y-2">
+                <a href="#inicio" class="nav-link py-2 px-4 rounded-lg hover:bg-slate-700">Inicio</a>
+                <a href="#problema" class="nav-link py-2 px-4 rounded-lg hover:bg-slate-700">El Problema</a>
+                <a href="#solucion" class="nav-link py-2 px-4 rounded-lg hover:bg-slate-700">La Solución</a>
+                <a href="#resultados" class="nav-link py-2 px-4 rounded-lg hover:bg-slate-700">Resultados</a>
+                <a href="#calidad" class="nav-link py-2 px-4 rounded-lg hover:bg-slate-700">Calidad del Software</a>
+                <a href="#demo" class="nav-link py-2 px-4 rounded-lg hover:bg-slate-700">Demo en Vivo</a>
+            </nav>
+            <div class="mt-auto text-xs text-slate-500">
+                <p>D. Buitrón, A. Salazar</p>
+                <p>UNIAJC - 2025</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-4 md:p-10">
+            
+            <!-- Mobile Header -->
+            <header class="lg:hidden bg-slate-800 text-white p-4 rounded-lg mb-6">
+                 <h1 class="text-2xl font-bold text-sky-400">Lia Chatbot</h1>
+                 <p class="text-sm text-slate-400">Análisis Interactivo</p>
+            </header>
+
+            <!-- Section: Inicio -->
+            <section id="inicio" class="mb-16 min-h-screen pt-16 -mt-16">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+                    <h2 class="text-sm font-semibold text-sky-600 uppercase mb-2">PROYECTO DE GRADO</h2>
+                    <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Integración de Inteligencia Artificial en Onboarding</h1>
+                    <p class="text-lg text-slate-600 mb-6">Este proyecto presenta el desarrollo de "Lia", un chatbot con IA diseñado para optimizar y personalizar el proceso de incorporación de nuevos empleados. La solución automatiza tareas, ofrece respuestas inmediatas y mejora la experiencia del nuevo colaborador, abordando las ineficiencias de los sistemas tradicionales.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <div class="bg-slate-50 p-4 rounded-lg">
+                            <h3 class="font-semibold mb-1">Autores</h3>
+                            <p>Danilo Andrés Buitrón, Andrés Felipe Salazar</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: El Problema -->
+            <section id="problema" class="mb-16 min-h-screen pt-16 -mt-16">
+                <h2 class="text-3xl font-bold mb-8">El Desafío del Onboarding Tradicional</h2>
+                <p class="mb-10 text-slate-600">El proceso de incorporación de nuevos empleados es una etapa crítica que, cuando se gestiona de forma ineficiente, genera consecuencias negativas en toda la organización. A continuación, se desglosan las causas y efectos principales de esta problemática.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-lg mb-3 text-red-600">Causas Tecnológicas</h3>
+                        <ul class="list-disc list-inside space-y-2 text-slate-600">
+                            <li>Falta de personalización del chatbot.</li>
+                            <li>Compleja integración con sistemas existentes.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-lg mb-3 text-yellow-600">Causas de Personal</h3>
+                        <ul class="list-disc list-inside space-y-2 text-slate-600">
+                            <li>Resistencia al cambio.</li>
+                            <li>Falta de formación para interactuar con la IA.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-lg mb-3 text-blue-600">Causas Organizacionales</h3>
+                        <ul class="list-disc list-inside space-y-2 text-slate-600">
+                            <li>Falta de alineación entre equipos.</li>
+                            <li>Poca claridad en los procesos.</li>
+                            <li>Recursos insuficientes.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+                    <h3 class="text-2xl font-bold mb-4 text-center">Expectativas de los Usuarios sobre el Chatbot</h3>
+                    <p class="text-center text-slate-600 mb-6">Una encuesta a 50 empleados reveló las funcionalidades más deseadas para un asistente de onboarding.</p>
+                    <div class="chart-container">
+                        <canvas id="expectationsChart"></canvas>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Section: La Solución -->
+            <section id="solucion" class="mb-16 min-h-screen pt-16 -mt-16">
+                <h2 class="text-3xl font-bold mb-8">Arquitectura y Metodología</h2>
+                <p class="mb-10 text-slate-600">Para construir una solución robusta y escalable, se diseñó una arquitectura de microservicios y se aplicó una metodología de desarrollo ágil que integra calidad y seguridad desde el inicio.</p>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 mb-12">
+                    <h3 class="text-2xl font-bold mb-6 text-center">Arquitectura Real del Sistema Implementado</h3>
+                    <div class="max-w-5xl mx-auto">
+                        <!-- Frontend Layer -->
+                        <div class="border-2 border-sky-500 rounded-xl p-4 mb-4 bg-sky-50 has-tooltip relative">
+                            <p class="font-bold text-center text-sky-700 mb-2">Frontend - React 19 + Vite + TailwindCSS</p>
+                            <div class="grid grid-cols-3 md:grid-cols-6 gap-2 text-center text-xs">
+                                <div class="bg-sky-200 p-2 rounded">Login.jsx</div>
+                                <div class="bg-sky-200 p-2 rounded">DashboardContent.jsx</div>
+                                <div class="bg-sky-200 p-2 rounded">OnboardingBot.jsx</div>
+                                <div class="bg-sky-200 p-2 rounded">UploadPDF.jsx</div>
+                                <div class="bg-sky-200 p-2 rounded">ExamForm.jsx</div>
+                                <div class="bg-sky-200 p-2 rounded">Metrics.jsx</div>
+                            </div>
+                            <div class="tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-80 bg-slate-900 text-white text-xs rounded-lg p-2 text-center">Componentes React modulares con estado centralizado, validación Pydantic y comunicación via fetch API.</div>
+                        </div>
+                        
+                        <!-- API Layer -->
+                        <div class="flex justify-center my-2"><div class="h-6 w-1 bg-slate-300"></div></div>
+                        <div class="border-2 border-slate-500 rounded-xl p-4 bg-slate-50 has-tooltip relative mb-4">
+                            <p class="font-bold text-center text-slate-700 mb-2">Backend FastAPI + Python 3.8</p>
+                            <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-center text-xs mb-2">
+                                <div class="bg-red-200 p-2 rounded">auth.py (JWT)</div>
+                                <div class="bg-blue-200 p-2 rounded">upload_pdf.py</div>
+                                <div class="bg-green-200 p-2 rounded">chatbot.py</div>
+                                <div class="bg-purple-200 p-2 rounded">onboarding.py</div>
+                                <div class="bg-yellow-200 p-2 rounded">data.py</div>
+                            </div>
+                            <div class="text-center text-xs text-slate-600">
+                                <span class="font-semibold">Seguridad:</span> CORS, SlowAPI, bcrypt, Headers + 
+                                <span class="font-semibold">Validación:</span> Pydantic models
+                            </div>
+                            <div class="tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-80 bg-slate-900 text-white text-xs rounded-lg p-2 text-center">API REST con autenticación JWT, rate limiting, validación automática y manejo seguro de archivos PDF.</div>
+                        </div>
+
+                        <!-- Services Layer -->
+                        <div class="flex justify-center my-2"><div class="h-6 w-1 bg-slate-300"></div></div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="border-2 border-orange-500 rounded-xl p-4 bg-orange-50 has-tooltip relative">
+                                <p class="font-bold text-center text-orange-700 mb-2">IA Local</p>
+                                <div class="text-center text-xs">
+                                    <div class="bg-orange-200 p-2 rounded mb-1">Ollama + LLaMA2</div>
+                                    <div class="text-orange-600">Procesamiento local<br>Sin envío de datos</div>
+                                </div>
+                                <div class="tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-slate-900 text-white text-xs rounded-lg p-2 text-center">Motor de IA completamente local para garantizar privacidad de datos sensibles.</div>
+                            </div>
+                            
+                            <div class="border-2 border-green-500 rounded-xl p-4 bg-green-50 has-tooltip relative">
+                                <p class="font-bold text-center text-green-700 mb-2">Firebase</p>
+                                <div class="text-center text-xs">
+                                    <div class="bg-green-200 p-2 rounded mb-1">Firestore + Auth</div>
+                                    <div class="text-green-600">Base de datos<br>Autenticación</div>
+                                </div>
+                                <div class="tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-slate-900 text-white text-xs rounded-lg p-2 text-center">Base de datos NoSQL en tiempo real con sistema de autenticación integrado.</div>
+                            </div>
+                            
+                            <div class="border-2 border-blue-500 rounded-xl p-4 bg-blue-50 has-tooltip relative">
+                                <p class="font-bold text-center text-blue-700 mb-2">Email Service</p>
+                                <div class="text-center text-xs">
+                                    <div class="bg-blue-200 p-2 rounded mb-1">Gmail API</div>
+                                    <div class="text-blue-600">Notificaciones<br>Alertas</div>
+                                </div>
+                                <div class="tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-slate-900 text-white text-xs rounded-lg p-2 text-center">Sistema de notificaciones automatizadas para seguimiento del proceso.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+                        <h3 class="text-2xl font-bold mb-4">Stack Tecnológico</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center"><span class="text-sky-500 mr-3">●</span><strong class="w-24">Frontend:</strong> React + Vite + TailwindCSS</li>
+                            <li class="flex items-center"><span class="text-slate-500 mr-3">●</span><strong class="w-24">Backend:</strong> FastAPI (Python)</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-3">●</span><strong class="w-24">IA Local:</strong> Ollama + Llama 3</li>
+                            <li class="flex items-center"><span class="text-yellow-500 mr-3">●</span><strong class="w-24">Base de Datos:</strong> Firebase Firestore</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+                        <h3 class="text-2xl font-bold mb-4">Metodología</h3>
+                         <ul class="space-y-3">
+                            <li class="flex items-center"><span class="text-indigo-500 mr-3">●</span><strong class="w-28">Framework:</strong> Scrum (Sprints de 2 semanas)</li>
+                            <li class="flex items-center"><span class="text-indigo-500 mr-3">●</span><strong class="w-28">Enfoque:</strong> DevSecOps</li>
+                            <li class="flex items-center"><span class="text-indigo-500 mr-3">●</span><strong class="w-28">Versionado:</strong> Git (GitHub/Bitbucket)</li>
+                            <li class="flex items-center"><span class="text-indigo-500 mr-3">●</span><strong class="w-28">CI/CD:</strong> Bitbucket Pipelines</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Resultados -->
+            <section id="resultados" class="mb-16 min-h-screen pt-16 -mt-16">
+                <h2 class="text-3xl font-bold mb-8">Validación y Resultados</h2>
+                <p class="mb-10 text-slate-600">La efectividad del chatbot "Lia" se midió mediante pruebas A/B para refinar la experiencia de usuario y una prueba T para comparar su rendimiento contra los métodos tradicionales de onboarding.</p>
+                
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 mb-12">
+                    <h3 class="text-2xl font-bold mb-2 text-center">Evolución del Chatbot: Pruebas A/B</h3>
+                    <p class="text-center text-slate-600 mb-6">Se compararon tres versiones para optimizar la interacción, claridad y orientación al usuario.</p>
+                    <div id="ab-testing" class="max-w-3xl mx-auto">
+                        <div class="flex justify-center space-x-2 mb-4">
+                            <button data-version="A" class="ab-button bg-slate-200 px-4 py-2 rounded-lg font-semibold">Versión A</button>
+                            <button data-version="B" class="ab-button bg-slate-200 px-4 py-2 rounded-lg font-semibold">Versión B</button>
+                            <button data-version="C" class="ab-button bg-sky-600 text-white px-4 py-2 rounded-lg font-semibold">Versión C (Final)</button>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <img id="ab-image" src="img/prueba C.png" alt="Prueba C del chatbot" class="w-full rounded-md mb-4 border">
+                            <h4 id="ab-title" class="font-bold text-lg mb-2">Prueba C (Versión Final)</h4>
+                            <p id="ab-description" class="text-sm text-slate-600">Interacción clara y personalizada. El bot saluda cordialmente, utiliza recursos visuales y explica de forma detallada sobre qué puede informar, anticipando las necesidades del usuario y mejorando notablemente la experiencia.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+                    <h3 class="text-2xl font-bold mb-4 text-center">Comparativa de Desempeño: Chatbot vs. Presencial</h3>
+                    <p class="text-center text-slate-600 mb-6">Resultados de la prueba T con 20 participantes.</p>
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Calidad -->
+            <section id="calidad" class="mb-16 min-h-screen pt-16 -mt-16">
+                <h2 class="text-3xl font-bold mb-8">Calidad y Mantenibilidad del Software</h2>
+                <p class="mb-10 text-slate-600">Se implementó un pipeline de CI/CD con análisis estático de código para garantizar un software robusto, seguro y fácil de mantener. A continuación se presentan los resultados finales del análisis con SonarQube.</p>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+                    <h3 class="text-2xl font-bold mb-6 text-center">Dashboard de Calidad (SonarQube)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="chart-container h-64 md:h-80">
+                            <canvas id="qualityGateChart"></canvas>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg">
+                                <p class="font-bold">Quality Gate: Fallido</p>
+                                <p class="text-sm">La cobertura de código nuevo (71.0%) no alcanzó el umbral requerido del 80%.</p>
+                            </div>
+                            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-r-lg">
+                                <p class="font-bold">Puntos Fuertes</p>
+                                <ul class="list-disc list-inside text-sm mt-1">
+                                    <li>0 Hotspots de Seguridad encontrados.</li>
+                                    <li>0.0% de Código Duplicado.</li>
+                                    <li>Solo 7 incidencias nuevas de bajo impacto.</li>
+                                </ul>
+                            </div>
+                            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-r-lg">
+                                <p class="font-bold">Conclusión</p>
+                                <p class="text-sm">El código es limpio y seguro, pero se requiere aumentar la cobertura de pruebas automatizadas como principal área de mejora.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Demo en Vivo -->
+            <section id="demo" class="min-h-screen pt-16 -mt-16">
+                <h2 class="text-3xl font-bold mb-8">Demostración en Vivo</h2>
+                <p class="mb-10 text-slate-600">El sistema está completamente funcional y se puede acceder desde cualquier dispositivo. La demostración incluye todos los componentes desarrollados funcionando de manera integrada.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+                        <h3 class="text-2xl font-bold mb-4 text-green-600">🚀 Sistema Operativo</h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex items-center justify-between p-2 bg-green-50 rounded">
+                                <span>Ollama + LLaMA2</span>
+                                <span class="text-green-600 font-bold">✓ ACTIVO</span>
+                            </div>
+                            <div class="flex items-center justify-between p-2 bg-green-50 rounded">
+                                <span>Backend FastAPI</span>
+                                <span class="text-green-600 font-bold">✓ ACTIVO</span>
+                            </div>
+                            <div class="flex items-center justify-between p-2 bg-green-50 rounded">
+                                <span>Frontend React</span>
+                                <span class="text-green-600 font-bold">✓ ACTIVO</span>
+                            </div>
+                            <div class="flex items-center justify-between p-2 bg-green-50 rounded">
+                                <span>Firebase Database</span>
+                                <span class="text-green-600 font-bold">✓ CONECTADO</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+                        <h3 class="text-2xl font-bold mb-4 text-blue-600">🌐 Acceso Público</h3>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-blue-50 rounded-lg">
+                                <p class="font-semibold text-sm mb-2">URL de Demostración:</p>
+                                <p class="text-xs text-blue-700 font-mono bg-white p-2 rounded border">
+                                    https://6b87dd70f1f2.ngrok-free.app/
+                                </p>
+                                <p class="text-xs text-slate-600 mt-2">
+                                    * URL generada dinámicamente con Ngrok
+                                </p>
+                            </div>
+                            <div class="text-sm text-slate-600">
+                                <p class="mb-2"><strong>Funcionalidades disponibles:</strong></p>
+                                <ul class="list-disc list-inside space-y-1 text-xs">
+                                    <li>Login con Firebase Auth</li>
+                                    <li>Upload y procesamiento PDF</li>
+                                    <li>Chatbot IA con LLaMA2</li>
+                                    <li>Examen automatizado</li>
+                                    <li>Dashboard de métricas</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-r from-sky-50 to-blue-50 p-8 rounded-2xl border border-sky-200">
+                    <h3 class="text-2xl font-bold mb-4 text-center text-sky-800">Flujo de Demostración</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-4 text-center">
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <div class="w-8 h-8 bg-sky-600 text-white rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">1</div>
+                            <p class="font-semibold text-sm">Login</p>
+                            <p class="text-xs text-slate-600">Autenticación Firebase</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <div class="w-8 h-8 bg-sky-600 text-white rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">2</div>
+                            <p class="font-semibold text-sm">Upload PDF</p>
+                            <p class="text-xs text-slate-600">Cargar manual de empresa</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <div class="w-8 h-8 bg-sky-600 text-white rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">3</div>
+                            <p class="font-semibold text-sm">Chatbot IA</p>
+                            <p class="text-xs text-slate-600">Interacción con LLaMA2</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <div class="w-8 h-8 bg-sky-600 text-white rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">4</div>
+                            <p class="font-semibold text-sm">Examen</p>
+                            <p class="text-xs text-slate-600">Evaluación automatizada</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <div class="w-8 h-8 bg-sky-600 text-white rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">5</div>
+                            <p class="font-semibold text-sm">Métricas</p>
+                            <p class="text-xs text-slate-600">Dashboard de resultados</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const chartData = {
+                expectations: {
+                    labels: ['Responder dudas frecuentes', 'Guiarme paso a paso', 'Explicar cultura y valores', 'Conocer herramientas y personas'],
+                    data: [36, 34, 18, 12],
+                },
+                performance: {
+                    time: [23, 35],
+                    score: [8.7, 8.1]
+                },
+                quality: {
+                    coverage: 71,
+                }
+            };
+
+            const abTestData = {
+                A: {
+                    title: 'Prueba A (Versión Inicial)',
+                    description: 'Prototipo funcional con diseño simple y capacidad de respuesta limitada. El bot responde con un mensaje genérico, mostrando debilidades en el flujo conversacional y la orientación al usuario.',
+                    image: 'https://i.imgur.com/S9gUf8Z.png'
+                },
+                B: {
+                    title: 'Prueba B (Versión Intermedia)',
+                    description: 'Avance significativo en la interacción. El chatbot muestra un tono más cercano y amigable, y explica su función, orientando mejor al usuario durante la conversación.',
+                    image: 'https://i.imgur.com/u3tJqf3.png'
+                },
+                C: {
+                    title: 'Prueba C (Versión Final)',
+                    description: 'Interacción clara y personalizada. El bot saluda cordialmente, utiliza recursos visuales y explica de forma detallada sobre qué puede informar, anticipando las necesidades del usuario y mejorando notablemente la experiencia.',
+                    image: 'https://i.imgur.com/8N0aD60.png'
+                }
+            };
+
+            // Expectations Chart (Donut)
+            const expectationsCtx = document.getElementById('expectationsChart');
+            if(expectationsCtx) {
+                new Chart(expectationsCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: chartData.expectations.labels,
+                        datasets: [{
+                            label: 'Porcentaje de Votos',
+                            data: chartData.expectations.data,
+                            backgroundColor: ['#0ea5e9', '#38bdf8', '#7dd3fc', '#bae6fd'],
+                            borderColor: '#f8fafc',
+                            borderWidth: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.label}: ${context.raw}%`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Performance Chart (Bar)
+            const performanceCtx = document.getElementById('performanceChart');
+            if(performanceCtx) {
+                new Chart(performanceCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Tiempo Promedio para Tareas (min)', 'Calificación Promedio en Prueba (sobre 10)'],
+                        datasets: [
+                            {
+                                label: 'Con Chatbot "Lia"',
+                                data: [chartData.performance.time[0], chartData.performance.score[0]],
+                                backgroundColor: '#0ea5e9',
+                                borderColor: '#0284c7',
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Presencial (Tradicional)',
+                                data: [chartData.performance.time[1], chartData.performance.score[1]],
+                                backgroundColor: '#a1a1aa',
+                                borderColor: '#71717a',
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        },
+                        plugins: {
+                           legend: {
+                                position: 'bottom',
+                            },
+                           tooltip: {
+                                mode: 'index',
+                                intersect: false,
+                           },
+                        }
+                    }
+                });
+            }
+            
+            // Quality Gate Chart (Gauge/Doughnut)
+            const qualityGateCtx = document.getElementById('qualityGateChart');
+            if (qualityGateCtx) {
+                new Chart(qualityGateCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Cobertura de Código', 'Restante para el 100%'],
+                        datasets: [{
+                            data: [chartData.quality.coverage, 100 - chartData.quality.coverage],
+                            backgroundColor: ['#0ea5e9', '#e2e8f0'],
+                            borderColor: '#f8fafc',
+                            borderWidth: 4,
+                            circumference: 180,
+                            rotation: 270,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        aspectRatio: 2,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { enabled: false }
+                        },
+                        cutout: '70%',
+                    },
+                    plugins: [{
+                        id: 'gaugeText',
+                        beforeDraw: (chart) => {
+                            const { width, height, ctx } = chart;
+                            ctx.restore();
+                            const fontSize = (height / 114).toFixed(2);
+                            ctx.font = `bold ${fontSize}em Inter, sans-serif`;
+                            ctx.textBaseline = 'middle';
+                            ctx.fillStyle = '#0f172a';
+
+                            const text = `${chartData.quality.coverage}%`;
+                            const textX = Math.round((width - ctx.measureText(text).width) / 2);
+                            const textY = height / 1.5;
+                            
+                            const label = 'Cobertura';
+                            const labelFontSize = (height / 200).toFixed(2);
+                            ctx.font = `${labelFontSize}em Inter, sans-serif`;
+                            const labelX = Math.round((width - ctx.measureText(label).width) / 2);
+                            const labelY = textY + 30;
+
+                            ctx.fillText(text, textX, textY);
+                            ctx.fillText(label, labelX, labelY);
+                            ctx.save();
+                        }
+                    }]
+                });
+            }
+
+            // A/B Testing Interaction
+            const abButtons = document.querySelectorAll('.ab-button');
+            const abImage = document.getElementById('ab-image');
+            const abTitle = document.getElementById('ab-title');
+            const abDescription = document.getElementById('ab-description');
+
+            abButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const version = button.dataset.version;
+                    
+                    abButtons.forEach(btn => {
+                        btn.classList.remove('bg-sky-600', 'text-white');
+                        btn.classList.add('bg-slate-200');
+                    });
+                    
+                    button.classList.add('bg-sky-600', 'text-white');
+                    button.classList.remove('bg-slate-200');
+
+                    if (abTestData[version]) {
+                        abImage.src = abTestData[version].image;
+                        abImage.alt = `Prueba ${version} del chatbot`;
+                        abTitle.textContent = abTestData[version].title;
+                        abDescription.textContent = abTestData[version].description;
+                    }
+                });
+            });
+
+            // Active Nav Link on Scroll
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('#desktop-nav a');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: '-50% 0px -50% 0px' });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+        });
+    </script>
+</body>
+</html>
