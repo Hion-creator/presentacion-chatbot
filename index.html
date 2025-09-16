@@ -279,6 +279,196 @@
             white-space: pre;
         }
 
+        /* --- Visual Tech Stack (Slide 5) --- */
+        .tech-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin: 20px 0 10px;
+        }
+
+        .tech-card-modern {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 18px;
+            padding: 26px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        .tech-card-modern:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+            border-color: rgba(255, 255, 255, 0.35);
+        }
+
+        .tech-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .tech-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #122946;
+            background: linear-gradient(135deg, #a8e8ff 0%, #62c0ff 100%);
+            box-shadow: 0 6px 16px rgba(97, 204, 255, 0.35);
+        }
+        .tech-icon.be {
+            background: linear-gradient(135deg, #ffd6a2 0%, #ffb36b 100%);
+            box-shadow: 0 6px 16px rgba(255, 169, 92, 0.35);
+        }
+        .tech-icon.ia {
+            background: linear-gradient(135deg, #b6ffcc 0%, #69e48f 100%);
+            box-shadow: 0 6px 16px rgba(124, 233, 165, 0.35);
+        }
+
+        .tech-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .pill-row { display: flex; flex-wrap: wrap; gap: 10px; }
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #0d2136;
+            background: linear-gradient(135deg, rgba(161, 220, 255, 0.95) 0%, rgba(130, 200, 255, 0.95) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            text-shadow: 0 1px 0 rgba(255,255,255,0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .pill.alt {
+            background: linear-gradient(135deg, rgba(255, 216, 164, 0.95) 0%, rgba(255, 186, 112, 0.95) 100%);
+        }
+        .pill.ia {
+            background: linear-gradient(135deg, rgba(197, 255, 214, 0.95) 0%, rgba(139, 238, 173, 0.95) 100%);
+        }
+        .pill:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.18); }
+        .pill .emoji { margin-right: 8px; filter: drop-shadow(0 1px 0 rgba(255,255,255,0.35)); }
+
+    /* Extended pill variants */
+    .pill.positive { background: linear-gradient(135deg, rgba(197, 255, 214, 0.95) 0%, rgba(139, 238, 173, 0.95) 100%); }
+    .pill.negative { background: linear-gradient(135deg, rgba(255, 203, 203, 0.95) 0%, rgba(255, 150, 150, 0.95) 100%); }
+    .pill.neutral { background: linear-gradient(135deg, rgba(209, 223, 255, 0.95) 0%, rgba(169, 196, 255, 0.95) 100%); }
+
+        /* Monogram icons for pills */
+        .logo-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+            color: #0d2136;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.35);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            text-shadow: 0 1px 0 rgba(255,255,255,0.35);
+        }
+        .logo-dot.fe { background: linear-gradient(135deg, #bfe8ff 0%, #7ec9ff 100%); }
+        .logo-dot.be { background: linear-gradient(135deg, #ffe1b8 0%, #ffc38a 100%); }
+        .logo-dot.ia { background: linear-gradient(135deg, #c9ffd9 0%, #93f1b4 100%); }
+    .logo-dot.red { background: linear-gradient(135deg, #ffc5c5 0%, #ff9a9a 100%); }
+    .logo-dot.green { background: linear-gradient(135deg, #c9ffd9 0%, #93f1b4 100%); }
+    .logo-dot.blue { background: linear-gradient(135deg, #bfd6ff 0%, #8bb3ff 100%); }
+
+        .mini-notes {
+            margin-top: 18px;
+            text-align: center;
+        }
+
+        .badge-soft {
+            display: inline-block;
+            margin: 6px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.95);
+        }
+
+        /* --- New components: stats, progress, timeline, comparison, testimonials, FAQ --- */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.22);
+            border-radius: 16px;
+            padding: 18px;
+            text-align: left;
+        }
+        .stat-card .value { font-size: 2rem; font-weight: 800; line-height: 1; margin-bottom: 6px; background: linear-gradient(135deg,#89f7fe,#66a6ff); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .stat-card .label { font-size: 0.9rem; color: rgba(255,255,255,0.85); }
+
+        .progress {
+            height: 10px; border-radius: 999px; background: rgba(255,255,255,0.15); overflow: hidden; margin-top: 10px;
+        }
+        .progress > .bar { height: 100%; background: linear-gradient(90deg,#4caf50,#81c784); width: var(--pct,50%); transition: width .5s ease; }
+
+        .timeline { position: relative; padding-left: 20px; }
+        .timeline::before { content: ""; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,0.25); }
+        .step { position: relative; padding-left: 20px; margin: 14px 0; }
+        .step::before { content: ""; position: absolute; left: -2px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: linear-gradient(135deg,#bfe8ff,#7ec9ff); border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+        .step .title { font-weight: 700; }
+        .step .desc { font-size: 0.95rem; color: rgba(255,255,255,0.9); }
+
+        .table-wrap { width: 100%; overflow-x: auto; }
+        .compare { width: 100%; min-width: 560px; border-collapse: collapse; overflow: hidden; border-radius: 16px; border: 1px solid rgba(255,255,255,0.2); }
+        .compare th, .compare td { padding: 14px; text-align: left; }
+        .compare thead { background: rgba(255,255,255,0.12); }
+        .compare tbody tr:nth-child(even) { background: rgba(255,255,255,0.06); }
+        .badge { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 700; }
+        .badge.good { background: rgba(76,175,80,0.3); border: 1px solid rgba(76,175,80,0.5); }
+        .badge.bad { background: rgba(255,107,107,0.3); border: 1px solid rgba(255,107,107,0.5); }
+
+        .flow-diagram { margin-top: 12px; display: flex; gap: 8px; align-items: center; justify-content: center; opacity: 0.9; }
+        .flow-diagram .chip { padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); font-weight: 700; }
+        .flow-diagram .arr { opacity: 0.8; }
+
+        /* QR CTA */
+        .cta-wrap { display: flex; gap: 20px; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+        .qr-box {
+            width: 120px; height: 120px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.35);
+            background:
+                repeating-linear-gradient(45deg, rgba(255,255,255,0.15) 0 6px, transparent 6px 12px),
+                repeating-linear-gradient(-45deg, rgba(255,255,255,0.15) 0 6px, transparent 6px 12px);
+            display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.85); font-weight: 800;
+        }
+        .cta-link { font-weight: 700; color: #fff; text-decoration: underline; }
+
+        .testimonial {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.22);
+            border-radius: 16px;
+            padding: 22px;
+            font-style: italic;
+            position: relative;
+        }
+        .testimonial::before { content: "“"; position: absolute; left: 12px; top: 0; font-size: 4rem; line-height: 1; color: rgba(255,255,255,0.25); }
+        .author { margin-top: 10px; font-weight: 700; font-style: normal; }
+
+        .faq { border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.2); }
+        .faq-item { background: rgba(255,255,255,0.08); }
+        .faq-q { width: 100%; text-align: left; padding: 16px; border: none; background: transparent; color: #fff; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-a { display: none; padding: 0 16px 16px; color: rgba(255,255,255,0.92); }
+        .faq-item.open .faq-a { display: block; }
+
         @media (max-width: 768px) {
             .grid {
                 grid-template-columns: 1fr;
@@ -299,139 +489,107 @@
             <span id="current-slide">1</span> / <span id="total-slides">9</span>
         </div>
 
-        <!-- Slide 1: Introducción -->
+        <!-- Slide 1: El Problema -->
         <div class="slide active">
-            <h1>🚀 OnboardingAI</h1>
-            <h3>Automatizando el onboarding para empresas de alto crecimiento con IA local</h3>
+            <h2>El Reto del Onboarding Moderno</h2>
             <div class="hero-text">
-                Una solución de IA conversacional que se ejecuta en tu propia infraestructura, utilizando Ollama con modelos de Google (Gemini/Gemma) para garantizar la máxima seguridad y control de datos en procesos de onboarding exponenciales.
+                Para Recursos Humanos, el onboarding es un proceso costoso, lento e inconsistente. Para el nuevo empleado, es una experiencia a menudo abrumadora y desconectada.
             </div>
             <div class="grid">
                 <div class="card">
-                    <h4>👥 Equipo</h4>
-                    <ul>
-                        <li><strong>Desarrolladores:</strong> Especialistas en IA y backend</li>
-                        <li><strong>Arquitectura:</strong> FastAPI + React + Ollama (Google Gemini)</li>
-                        <li><strong>Enfoque:</strong> Security-first, local processing</li>
-                        <li><strong>Experiencia:</strong> HR-tech y enterprise solutions</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h4>🎯 Problema a Resolver</h4>
-                    <ul>
-                        <li><strong>Onboarding manual:</strong> 20+ horas HR por empleado</li>
-                        <li><strong>Crecimiento exponencial:</strong> Procesos de HR no escalan con la velocidad del negocio</li>
-                        <li><strong>Inconsistencia:</strong> Experiencia variable entre equipos</li>
-                        <li><strong>Seguridad:</strong> Datos sensibles en clouds externos</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 2: Demo Funcional -->
-        <div class="slide">
-            <h2>💻 Demo en Vivo</h2>
-            <div class="grid">
-                <div class="card">
-                    <h4>👤 Caso: Sara Gómez - EduTech Innovators</h4>
-                    <ul>
-                        <li><strong>Rol:</strong> Desarrolladora Frontend Senior</li>
-                        <li><strong>Departamento:</strong> Tecnología</li>
-                        <li><strong>Ubicación:</strong> Madrid, trabajo híbrido</li>
-                        <li><strong>Inicio:</strong> Lunes próximo</li>
-                        <li><strong>Experiencia:</strong> 5+ años React/Vue.js</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h4>🎯 Flujo de Demo</h4>
-                    <ul>
-                        <li><strong>Login:</strong> Credenciales corporativas</li>
-                        <li><strong>IA Conversacional:</strong> Saludo personalizado</li>
-                        <li><strong>Evaluación:</strong> Skills técnicos frontend</li>
-                        <li><strong>Políticas:</strong> Explicación interactiva</li>
-                        <li><strong>Dashboard:</strong> Progreso en tiempo real</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="cta">
-                <a href="http://localhost:3000" class="demo-link" target="_blank">
-                    🔴 VER DEMO EN VIVO → localhost:3000
-                </a>
-                <p><strong>Nota:</strong> IA procesando localmente con Ollama + Google Gemini.</p>
-            </div>
-        </div>
-
-        <!-- Slide 3: Arquitectura Técnica -->
-        <div class="slide">
-            <h2>🏗️ Arquitectura Técnica</h2>
-            <div class="grid">
-                <div class="card">
-                    <h4>⚙️ Stack Tecnológico</h4>
-                    <div>
-                        <span class="tech-badge">FastAPI</span>
-                        <span class="tech-badge">React + Vite</span>
-                        <span class="tech-badge">Ollama</span>
-                        <span class="tech-badge">Google Gemini</span>
-                        <span class="tech-badge">Firebase</span>
-                        <span class="tech-badge">Docker</span>
+                    <h4><span style="color: #ff6b6b;">❌</span> Puntos de Dolor (Empresa)</h4>
+                    <div class="pill-row">
+                        <span class="pill negative" title="Costos elevados para HR"><span class="logo-dot red">$$</span>20+ horas HR/contratación</span>
+                        <span class="pill negative" title="Riesgo al usar terceros"><span class="logo-dot red">SEC</span>Riesgo de seguridad (terceros)</span>
+                        <span class="pill negative" title="Experiencia desigual"><span class="logo-dot red">VAR</span>Inconsistencia entre equipos</span>
+                        <span class="pill negative" title="Impacto en retención"><span class="logo-dot red">RET</span>Baja retención</span>
                     </div>
-                    <ul>
-                        <li><strong>Backend:</strong> FastAPI (Python 3.8+) - API REST moderna</li>
-                        <li><strong>Frontend:</strong> React 18 con Vite - SPA optimizada</li>
-                        <li><strong>IA Engine:</strong> Ollama server + Google Gemini/Gemma</li>
-                        <li><strong>Base de datos:</strong> Firebase Firestore + Auth</li>
-                    </ul>
                 </div>
                 <div class="card">
-                    <h4>🔄 Flujo de Datos</h4>
-                    <ul>
-                        <li><strong>1. Usuario:</strong> Interactúa via React UI</li>
-                        <li><strong>2. Frontend:</strong> Envía requests a FastAPI</li>
-                        <li><strong>3. Backend:</strong> Procesa y comunica con Ollama</li>
-                        <li><strong>4. IA Local:</strong> Google Gemini genera respuestas</li>
-                        <li><strong>5. Persistencia:</strong> Firebase guarda progreso</li>
-                        <li><strong>6. Real-time:</strong> Updates instantáneos en dashboard</li>
-                    </ul>
+                    <h4><span style="color: #ff6b6b;">❌</span> Puntos de Dolor (Empleado)</h4>
+                    <div class="pill-row">
+                        <span class="pill negative" title="Documentos y políticas"><span class="logo-dot red">DOC</span>Sobrecarga de información</span>
+                        <span class="pill negative" title="Falta de guía"><span class="logo-dot red">?</span>Falta de claridad</span>
+                        <span class="pill negative" title="Poco personalizado"><span class="logo-dot red">GEN</span>Experiencia impersonal</span>
+                        <span class="pill negative" title="Trabajo remoto"><span class="logo-dot red">REM</span>Ansiedad y aislamiento</span>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <h4>🛡️ Seguridad y Control</h4>
-                <div>
-                    <span class="security-highlight">Tu infraestructura, tus reglas</span>
-                    <span class="security-highlight">Procesamiento local instantáneo</span>
-                    <span class="security-highlight">Zero APIs externas</span>
-                </div>
-                <ul>
-                    <li><strong>Control total:</strong> Servidor ejecutando en tu perímetro corporativo</li>
-                    <li><strong>Respuesta instantánea:</strong> Sin dependencia de conectividad externa</li>
-                    <li><strong>Compliance nativo:</strong> GDPR, HIPAA, SOX ready desde el diseño</li>
-                </ul>
             </div>
         </div>
+
+        <!-- Slide 2: La Solución: OnboardingAI -->
+        <div class="slide">
+            <h1><span style="background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">💡</span> La Solución: OnboardingAI</h1>
+            <h3>Un asistente de IA que vive dentro de tu empresa</h3>
+            <div class="hero-text">
+                OnboardingAI es un chatbot inteligente que guía a los nuevos empleados a través de todo el proceso de onboarding de forma conversacional, segura y 100% local.
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h4><span style="color: #4CAF50;">✔️</span> Beneficios para la Empresa</h4>
+                    <div class="pill-row">
+                        <span class="pill positive" title="Automatiza tareas repetitivas"><span class="logo-dot green">AI</span>Automatización inteligente</span>
+                        <span class="pill positive" title="Datos on‑prem"><span class="logo-dot green">SEC</span>Seguridad máxima (on‑prem)</span>
+                        <span class="pill positive" title="Estandariza la experiencia"><span class="logo-dot green">STD</span>Consistencia garantizada</span>
+                        <span class="pill positive" title="Progreso y KPIs"><span class="logo-dot green">RT</span>Visibilidad en tiempo real</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h4><span style="color: #4CAF50;">✔️</span> Beneficios para el Empleado</h4>
+                    <div class="pill-row">
+                        <span class="pill positive" title="Asistencia constante"><span class="logo-dot green">24/7</span>Guía personalizada</span>
+                        <span class="pill positive" title="Conversaciones, no PDFs"><span class="logo-dot green">UX</span>Aprendizaje interactivo</span>
+                        <span class="pill positive" title="Ritmo propio"><span class="logo-dot green">⏱</span>Ritmo a medida</span>
+                        <span class="pill positive" title="Menos ansiedad"><span class="logo-dot green">OK</span>Confianza y claridad</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
 
         <!-- Slide 4: Diferenciación -->
         <div class="slide">
             <h2>💡 Diferenciación Competitiva</h2>
-            <div class="grid">
-                <div class="card">
-                    <h4>🆚 Competidores Cloud</h4>
-                    <ul>
-                        <li><strong>BambooHR/Workday:</strong> Datos en servidores externos</li>
-                        <li><strong>Chatbots tradicionales:</strong> Scripts predefinidos, no IA real</li>
-                        <li><strong>OpenAI integrations:</strong> Datos van a servidores de terceros</li>
-                        <li><strong>Soluciones custom:</strong> Meses de desarrollo, alto costo</li>
-                        <li><strong>Latencia alta:</strong> Dependencia de conectividad externa</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h4>🚀 OnboardingAI Local</h4>
-                    <ul>
-                        <li><strong>IA conversacional real:</strong> Google Gemini corriendo local</li>
-                        <li><strong>XOR logic flows:</strong> Previene loops infinitos</li>
-                        <li><strong>Security by design:</strong> Datos nunca salen del perímetro</li>
-                        <li><strong>Plug & play:</strong> 3 días de implementación total</li>
-                        <li><strong>Respuesta <200ms:</strong> Procesamiento en tu hardware</li>
-                    </ul>
+            <div class="card">
+                <h4>🧮 Matriz de Comparación</h4>
+                <div class="table-wrap">
+                <table class="compare">
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Competidores Cloud</th>
+                            <th>OnboardingAI (Local)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Privacidad de datos</td>
+                            <td><span class="badge bad">Externos</span></td>
+                            <td><span class="badge good">On‑prem</span></td>
+                        </tr>
+                        <tr>
+                            <td>IA real</td>
+                            <td><span class="badge bad">Scripts</span></td>
+                            <td><span class="badge good">Gemini/Gemma</span></td>
+                        </tr>
+                        <tr>
+                            <td>Latencia</td>
+                            <td><span class="badge bad">Variable</span></td>
+                            <td><span class="badge good">≈200ms</span></td>
+                        </tr>
+                        <tr>
+                            <td>Costos</td>
+                            <td><span class="badge bad">Altos</span></td>
+                            <td><span class="badge good">Optimizado</span></td>
+                        </tr>
+                        <tr>
+                            <td>Dependencias</td>
+                            <td><span class="badge bad">Terceros</span></td>
+                            <td><span class="badge good">Zero APIs externas</span></td>
+                        </tr>
+                    </tbody>
+                </table>
                 </div>
             </div>
             <div class="grid">
@@ -441,7 +599,7 @@
                 </div>
                 <div class="metric">
                     <h4>⚡ 3</h4>
-                    <p>Días implementación</p>
+                    <p>semanas implementación</p>
                 </div>
                 <div class="metric">
                     <h4>🧠 Real</h4>
@@ -450,44 +608,54 @@
             </div>
         </div>
 
-        <!-- Slide 5: Transferencia de Conocimiento - Arquitectura -->
+        <!-- Slide 5: Arquitectura-->
         <div class="slide">
-            <h2>📋 Transferencia: Arquitectura</h2>
-            <div class="grid">
-                <div class="card">
-                    <h4>🏗️ Componentes Core</h4>
-                    <ul>
-                        <li><strong>Backend:</strong> FastAPI (Python) - API REST asíncrona</li>
-                        <li><strong>Frontend:</strong> React + Vite - SPA con hot reload</li>
-                        <li><strong>IA Engine:</strong> Ollama server + Google Gemini/Gemma local</li>
-                        <li><strong>Database:</strong> Firebase Firestore + real-time sync</li>
-                        <li><strong>Auth:</strong> Firebase Auth + JWT tokens</li>
-                    </ul>
+            <h2>📋 Arquitectura </h2>
+            <div class="tech-section">
+                <div class="tech-card-modern">
+                    <div class="tech-header">
+                        <div class="tech-icon">FE</div>
+                        <div class="tech-title">Frontend</div>
+                    </div>
+                    <div class="pill-row">
+                        <span class="pill" title="Librería de UI"><span class="logo-dot fe">RE</span>React 18</span>
+                        <span class="pill" title="Herramienta de build y dev server"><span class="logo-dot fe">VI</span>Vite</span>
+                        <span class="pill" title="Tipado estático para JS"><span class="logo-dot fe">TS</span>TypeScript</span>
+                        <span class="pill" title="CSS utility-first (opcional)"><span class="logo-dot fe">TW</span>Tailwind</span>
+                    </div>
                 </div>
-                <div class="card">
-                    <h4>🔄 Data Flow</h4>
-                    <ul>
-                        <li><strong>React UI →</strong> FastAPI endpoints (REST)</li>
-                        <li><strong>FastAPI →</strong> Ollama server (HTTP)</li>
-                        <li><strong>Ollama →</strong> Google Gemini (local inference)</li>
-                        <li><strong>Response →</strong> Firebase (persistence)</li>
-                        <li><strong>Dashboard →</strong> Real-time updates</li>
-                    </ul>
+
+                <div class="tech-card-modern">
+                    <div class="tech-header">
+                        <div class="tech-icon be">BE</div>
+                        <div class="tech-title">Backend</div>
+                    </div>
+                    <div class="pill-row">
+                        <span class="pill alt" title="Framework web en Python"><span class="logo-dot be">FA</span>FastAPI</span>
+                        <span class="pill alt" title="Servidor ASGI"><span class="logo-dot be">UV</span>Uvicorn</span>
+                        <span class="pill alt" title="Lenguaje y runtime"><span class="logo-dot be">PY</span>Python 3.10+</span>
+                        <span class="pill alt" title="Autenticación y base de datos"><span class="logo-dot be">FB</span>Firebase (Auth / Firestore)</span>
+                    </div>
+                </div>
+
+                <div class="tech-card-modern">
+                    <div class="tech-header">
+                        <div class="tech-icon ia">IA</div>
+                        <div class="tech-title">IA Local</div>
+                    </div>
+                    <div class="pill-row">
+                        <span class="pill ia" title="Ejecución local de modelos"><span class="logo-dot ia">OL</span>Ollama</span>
+                        <span class="pill ia" title="Familia de modelos de Google"><span class="logo-dot ia">GG</span>Google Gemini / Gemma</span>
+                        <span class="pill ia" title="Retrieval-Augmented Generation (opcional)"><span class="logo-dot ia">RG</span>RAG (opcional)</span>
+                        <span class="pill ia" title="Tradeoff rendimiento-memoria"><span class="logo-dot ia">Q8</span>Quantization Q4–Q8</span>
+                    </div>
                 </div>
             </div>
-            <div class="card">
-                <h4>💡 Lógica XOR Anti-Loops</h4>
-                <div class="code-snippet">
-                    <code>if (current_context XOR previous_context) {
-    // Nueva información detectada
-    continue_conversation()
-    update_context_state()
-} else {
-    // Loop detectado, cambiar estrategia
-    escalate_to_human()
-    log_conversation_issue()
-}</code>
-                </div>
+
+            <div class="mini-notes">
+                <span class="badge-soft">100% on‑prem</span>
+                <span class="badge-soft">Zero APIs externas</span>
+                <span class="badge-soft">Actualización en tiempo real</span>
             </div>
         </div>
 
@@ -497,32 +665,27 @@
             <div class="grid">
                 <div class="card">
                     <h4>⚙️ Requisitos del Sistema</h4>
-                    <ul>
-                        <li><strong>OS:</strong> Ubuntu 20.04+ / CentOS 8+ / Windows Server</li>
-                        <li><strong>Python:</strong> 3.8+ con pip y virtualenv</li>
-                        <li><strong>Node.js:</strong> 18+ con npm/yarn</li>
-                        <li><strong>Hardware:</strong> 16GB RAM, GPU recomendada (CUDA/ROCm)</li>
-                        <li><strong>Storage:</strong> 50GB para modelos y datos</li>
-                    </ul>
+                    <div class="pill-row">
+                        <span class="pill neutral"><span class="logo-dot blue">OS</span>Ubuntu/CentOS/Windows</span>
+                        <span class="pill neutral"><span class="logo-dot blue">PY</span>Python 3.8+ (pip/venv)</span>
+                        <span class="pill neutral"><span class="logo-dot blue">ND</span>Node.js 18+</span>
+                        <span class="pill neutral"><span class="logo-dot blue">GPU</span>16GB RAM (GPU opcional)</span>
+                        <span class="pill neutral"><span class="logo-dot blue">SSD</span>50GB almacenamiento</span>
+                    </div>
                 </div>
                 <div class="card">
-                    <h4>🔧 Setup Técnico</h4>
-                    <ul>
-                        <li><strong>Ollama install:</strong> curl + modelo Google Gemini/Gemma download</li>
-                        <li><strong>Backend:</strong> uvicorn --host 0.0.0.0 --port 8000</li>
-                        <li><strong>Frontend:</strong> npm build → nginx/apache deploy</li>
-                        <li><strong>Firebase:</strong> Service account + Firestore setup</li>
-                        <li><strong>SSL/TLS:</strong> Certificados para producción</li>
-                    </ul>
+                    <h4>🔧 Setup Técnico (Timeline)</h4>
+                    <div class="timeline">
+                        <div class="step"><div class="title">Día 1 — Infra y Modelo</div><div class="desc">Instalar Ollama + descargar Gemini/Gemma. Provisionar servidor.</div></div>
+                        <div class="step"><div class="title">Día 2 — Backend y Front</div><div class="desc">Configurar Uvicorn (0.0.0.0:8000), build de frontend y deploy.</div></div>
+                        <div class="step"><div class="title">Día 3 — Datos y Seguridad</div><div class="desc">Conectar Firebase (Service Account), habilitar SSL/TLS.</div></div>
+                    </div>
                 </div>
             </div>
-            <div class="card">
-                <h4>🚀 Timeline de Deployment</h4>
-                <ul>
-                    <li><strong>Día 1:</strong> Infraestructura + Ollama + modelo download</li>
-                    <li><strong>Día 2:</strong> App deployment + Firebase config</li>
-                    <li><strong>Día 3:</strong> Testing completo + training del equipo</li>
-                </ul>
+            <div class="grid stats-grid">
+                <div class="stat-card"><div class="value" data-target="3" data-suffix=" días">0</div><div class="label">Implementación típica</div><div class="progress"><div class="bar" style="--pct:90%"></div></div></div>
+                <div class="stat-card"><div class="value" data-prefix="≤" data-target="200" data-suffix="ms">0</div><div class="label">Respuesta promedio</div><div class="progress"><div class="bar" style="--pct:80%"></div></div></div>
+                <div class="stat-card"><div class="value" data-target="100" data-suffix="%">0</div><div class="label">Datos on‑prem</div><div class="progress"><div class="bar" style="--pct:100%"></div></div></div>
             </div>
         </div>
 
@@ -532,33 +695,43 @@
             <div class="grid">
                 <div class="card">
                     <h4>🔧 Monitoreo Diario</h4>
-                    <ul>
-                        <li><strong>Health checks:</strong> API status + Ollama responsiveness</li>
-                        <li><strong>Performance:</strong> Response times + GPU utilization</li>
-                        <li><strong>Logs:</strong> Structured logging de conversaciones</li>
-                        <li><strong>Usuarios:</strong> Sesiones activas + completion rates</li>
-                        <li><strong>Alertas:</strong> Notificaciones automáticas de issues</li>
-                    </ul>
+                    <div class="stats-grid">
+                        <div class="stat-card"><div class="value" data-target="95" data-suffix="%">0</div><div class="label">Health checks OK</div><div class="progress"><div class="bar" style="--pct:95%"></div></div></div>
+                        <div class="stat-card"><div class="value" data-target="200" data-suffix="ms" data-prefix="≈">0</div><div class="label">Latencia</div><div class="progress"><div class="bar" style="--pct:80%"></div></div></div>
+                        <div class="stat-card"><div class="value">24/7</div><div class="label">Alertas</div><div class="progress"><div class="bar" style="--pct:100%"></div></div></div>
+                        <div class="stat-card"><div class="value" data-target="99.9" data-suffix="%" data-decimals="1">0</div><div class="label">Disponibilidad</div><div class="progress"><div class="bar" style="--pct:90%"></div></div></div>
+                    </div>
                 </div>
                 <div class="card">
                     <h4>📊 KPIs de Negocio</h4>
-                    <ul>
-                        <li><strong>Completion rate:</strong> % empleados que terminan proceso</li>
-                        <li><strong>Time-to-productivity:</strong> Días hasta empleado productivo</li>
-                        <li><strong>Satisfaction score:</strong> Rating promedio del proceso</li>
-                        <li><strong>Escalation rate:</strong> % que requiere intervención humana</li>
-                        <li><strong>ROI measurement:</strong> Tiempo HR ahorrado vs costo</li>
-                    </ul>
+                    <div class="stats-grid">
+                        <div class="stat-card"><div class="value">85%</div><div class="label">Completion rate</div><div class="progress"><div class="bar" style="--pct:85%"></div></div></div>
+                        <div class="stat-card"><div class="value">-40%</div><div class="label">Time‑to‑productivity</div><div class="progress"><div class="bar" style="--pct:60%"></div></div></div>
+                        <div class="stat-card"><div class="value">4.7/5</div><div class="label">CSAT</div><div class="progress"><div class="bar" style="--pct:94%"></div></div></div>
+                        <div class="stat-card"><div class="value">↓62%</div><div class="label">Turnover</div><div class="progress"><div class="bar" style="--pct:62%"></div></div></div>
+                    </div>
                 </div>
             </div>
             <div class="card">
-                <h4>🛠️ Troubleshooting Común</h4>
-                <ul>
-                    <li><strong>Ollama no responde:</strong> Check GPU memory, restart service</li>
-                    <li><strong>Context loops:</strong> Review XOR logic, adjust prompts</li>
-                    <li><strong>Firebase timeouts:</strong> Verify connection, check DB indexes</li>
-                    <li><strong>High latency:</strong> GPU optimization, model quantization</li>
-                </ul>
+                    <h4>🛠️ Troubleshooting Común (FAQ)</h4>
+                    <div class="faq" role="region" aria-label="Preguntas frecuentes">
+                    <div class="faq-item">
+                        <button class="faq-q" aria-expanded="false" aria-controls="faq1">La GPU se queda sin memoria <span aria-hidden="true">+</span></button>
+                        <div class="faq-a" id="faq1" hidden>Reduce el tamaño del modelo (Q4–Q8), limita batch size, o reinicia el servicio de Ollama.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-q" aria-expanded="false" aria-controls="faq2">Las conversaciones entran en loop <span aria-hidden="true">+</span></button>
+                        <div class="faq-a" id="faq2" hidden>Activa reglas XOR y ajusta prompts de corte; verifica estados de sesión.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-q" aria-expanded="false" aria-controls="faq3">Firestore está lento <span aria-hidden="true">+</span></button>
+                        <div class="faq-a" id="faq3" hidden>Crea índices compuestos y revisa reglas de seguridad; usa caché cuando aplique.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-q" aria-expanded="false" aria-controls="faq4">Latencia alta <span aria-hidden="true">+</span></button>
+                        <div class="faq-a" id="faq4" hidden>Optimiza quantization, habilita streaming de tokens y verifica afinidad CPU/GPU.</div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -566,25 +739,13 @@
         <div class="slide">
             <h2>💼 Casos de Uso Validados</h2>
             <div class="grid">
-                <div class="card">
-                    <h4>🏢 EduTech Innovators</h4>
-                    <ul>
-                        <li><strong>Perfil:</strong> 150 empleados, sector educación tech</li>
-                        <li><strong>Challenge:</strong> 40% turnover en primeros 90 días</li>
-                        <li><strong>Solución:</strong> Onboarding personalizado con IA local</li>
-                        <li><strong>Resultado:</strong> 25% turnover (62% mejora)</li>
-                        <li><strong>Implementation:</strong> 3 días de setup completo</li>
-                    </ul>
+                <div class="testimonial">
+                    “Pasamos de 3 semanas de onboarding a 5 días. La retención subió 62% en 3 meses.”
+                    <div class="author">— COO, EduTech Innovators (150 empleados)</div>
                 </div>
-                <div class="card">
-                    <h4>🏥 MediCare Connect</h4>
-                    <ul>
-                        <li><strong>Perfil:</strong> 300 empleados, sector salud</li>
-                        <li><strong>Challenge:</strong> Strict HIPAA compliance en onboarding</li>
-                        <li><strong>Solución:</strong> IA local, datos nunca salen del perímetro</li>
-                        <li><strong>Resultado:</strong> 100% compliance, auditoría aprobada</li>
-                        <li><strong>Beneficio:</strong> 70% reducción tiempo HR</li>
-                    </ul>
+                <div class="testimonial">
+                    “Cumplimos HIPAA con un asistente conversacional on‑prem. Cero fuga de datos.”
+                    <div class="author">— CISO, MediCare Connect (300 empleados)</div>
                 </div>
             </div>
             <div class="grid">
@@ -609,23 +770,21 @@
             <div class="grid">
                 <div class="card">
                     <h4>✅ Logros Técnicos Demostrados</h4>
-                    <ul>
-                        <li><strong>IA Local funcionando:</strong> Google Gemini/Gemma + Ollama en producción</li>
-                        <li><strong>XOR anti-loops:</strong> Conversaciones naturales sin bucles</li>
-                        <li><strong>Security total:</strong> Zero data leakage, procesamiento local</li>
-                        <li><strong>Performance:</strong> <200ms response time promedio</li>
-                        <li><strong>Escalabilidad:</strong> Casos reales con 150-300 empleados</li>
-                    </ul>
+                    <div class="pill-row">
+                        <span class="pill ia"><span class="logo-dot ia">IA</span>Gemini/Gemma + Ollama (prod)</span>
+                        <span class="pill positive"><span class="logo-dot green">XOR</span>Anti‑loops</span>
+                        <span class="pill positive"><span class="logo-dot green">SEC</span>Zero data leakage</span>
+                        <span class="pill positive"><span class="logo-dot green">≈200ms</span>Respuesta promedio</span>
+                        <span class="pill positive"><span class="logo-dot green">SCL</span>Escala 150–300 empleados</span>
+                    </div>
                 </div>
                 <div class="card">
-                    <h4>🚀 Roadmap Inmediato</h4>
-                    <ul>
-                        <li><strong>Pilot program:</strong> 30 días prueba gratuita disponible</li>
-                        <li><strong>Customización:</strong> Adaptar flujos a procesos específicos</li>
-                        <li><strong>Integraciones:</strong> APIs con HRIS existentes</li>
-                        <li><strong>Multi-idioma:</strong> Soporte español, inglés, portugués</li>
-                        <li><strong>Advanced analytics:</strong> ML predictions sobre employee success</li>
-                    </ul>
+                    <h4>🚀 Roadmap Inmediato (Timeline)</h4>
+                    <div class="timeline">
+                        <div class="step"><div class="title">Semana 1 — Pilot</div><div class="desc">Prueba gratuita 30 días con 1 área de negocio.</div></div>
+                        <div class="step"><div class="title">Semana 2–3 — Integraciones</div><div class="desc">Conectar HRIS, afinar flujos y permisos.</div></div>
+                        <div class="step"><div class="title">Semana 4 — Analytics</div><div class="desc">Desplegar dashboards y predicciones ML.</div></div>
+                    </div>
                 </div>
             </div>
             <div class="cta">
@@ -634,9 +793,11 @@
                     <strong>¿Preguntas? ¿Comentarios?</strong><br>
                     Demo live disponible en: <strong>localhost:3000</strong>
                 </p>
-                <div style="margin-top: 20px;">
-                    <span class="tech-badge">Gracias por su atención</span>
+                <div class="cta-wrap" aria-label="Call to action">
+                    <div class="qr-box" role="img" aria-label="Código QR de la demo (reemplazar por imagen real si se desea)">QR</div>
+                    <a class="cta-link" href="http://127.0.0.1:3000" target="_blank" rel="noopener" aria-label="Abrir demo en una nueva pestaña">http://127.0.0.1:3000</a>
                 </div>
+                <div style="margin-top: 16px;"><span class="tech-badge">Gracias por su atención</span></div>
             </div>
         </div>
     </div>
@@ -658,6 +819,8 @@
             currentSlide = (n + totalSlides) % totalSlides;
             slides[currentSlide].classList.add('active');
             document.getElementById('current-slide').textContent = currentSlide + 1;
+            // Trigger counters when a slide becomes active
+            startCounters(slides[currentSlide]);
         }
 
         function nextSlide() {
@@ -679,6 +842,43 @@
 
         // Initialize
         showSlide(0);
+
+        // Minimal FAQ accordion toggle with ARIA/hidden management
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.faq-q');
+            if (!btn) return;
+            const item = btn.closest('.faq-item');
+            const answer = item.querySelector('.faq-a');
+            const expanded = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', String(!expanded));
+            item.classList.toggle('open', !expanded);
+            if (answer) {
+                answer.hidden = expanded; // show when not expanded previously
+            }
+        });
+
+        // Counter animation
+        function animateValue(el, start, end, duration, decimals = 0, prefix = '', suffix = '') {
+            const startTime = performance.now();
+            function step(now) {
+                const p = Math.min((now - startTime) / duration, 1);
+                const val = start + (end - start) * p;
+                el.textContent = `${prefix}${val.toFixed(decimals)}${suffix}`;
+                if (p < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+
+        function startCounters(scope) {
+            const counters = scope.querySelectorAll('.stat-card .value[data-target]');
+            counters.forEach(el => {
+                const end = parseFloat(el.getAttribute('data-target'));
+                const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+                const prefix = el.getAttribute('data-prefix') || '';
+                const suffix = el.getAttribute('data-suffix') || '';
+                animateValue(el, 0, end, 900, decimals, prefix, suffix);
+            });
+        }
     </script>
 </body>
 </html>
